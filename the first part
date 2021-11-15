@@ -1,0 +1,16 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.loadtxt("signal0.dat")
+data_new = []
+data_new.append(data[0])
+for i in range(0, len(data), 10):
+    data_new.append(data[i])
+    for j in range(i+1, i+10, 1):
+        data_new.append(np.average(data[i+1:j+1]))
+X = np.arange(1, len(data) + 1, 1)
+X1 = np.arange(1, len(data_new) + 1, 1)
+print(data_new)
+plt.plot(X, data)
+plt.plot(X1, data_new)
+plt.show()
