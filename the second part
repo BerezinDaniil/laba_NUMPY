@@ -1,0 +1,21 @@
+from PIL import Image
+import numpy as np
+import imageio
+
+# считаем картинку в numpy array
+img = Image.open("lunar01_raw.jpg")
+data = np.array(img)
+
+k = 255 / (data.max() - data.min())
+b = 255 * (1 - ((data.max()) / (data.max() - data.min())))
+print(data)
+data_new = data * k
+data_new += b
+data_new = data_new.astype(np.int32)
+print(data_new)
+print(data_new.max(), data_new.min())
+print(data.shape)
+print(data_new.shape)
+# запись картинки после обработки
+
+imageio.imwrite('lunar01_raw_new.jpg', data_new)
